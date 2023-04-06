@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+const int MAX = 100;
+
+class SparseMatrix {
+private:
+    int matrix[MAX][MAX];
+    int sizeRow;
+    int sizeCol;
+
+public:
+    SparseMatrix(int row, int col) {
+        sizeRow = row;
+        sizeCol = col;
+        for (int i = 0; i < sizeRow; i++) {
+            for (int j = 0; j < sizeCol; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    void insert(int row, int col, int value) {
+        if (row < 0 || row >= sizeRow || col < 0 || col >= sizeCol) {
+            cout << "Invalid position\n";
+            return;
+        }
+
+        matrix[row][col] = value;
+    }
+
+    int get(int row, int col) {
+        if (row < 0 || row >= sizeRow || col < 0 || col >= sizeCol) {
+            cout << "Invalid position\n";
+            return -1;
+        }
+
+        return matrix[row][col];
+    }
+
+    void print() {
+        for (int i = 0; i < sizeRow; i++) {
+            for (int j = 0; j < sizeCol; j++) {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    SparseMatrix matrix(3, 3);
+
+    matrix.insert(0, 0, 1);
+    matrix.insert(1, 1, 2);
+    matrix.insert(2, 2, 3);
+
+    matrix.print();
+
+    cout << "Value at (1,1): " << matrix.get(1, 1) << endl;
+
+    return 0;
+}
